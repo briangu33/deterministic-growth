@@ -1,3 +1,6 @@
+import numpy as np
+import math
+
 class Point:
 
 	def __init__(self, x, y, index = -1):
@@ -22,7 +25,7 @@ class Point:
 	def __repr__(self):
 		return "(" + str(self.x) + ", " + str(self.y) + ")"
 
-def run_experiment(N_TIMESTEPS, MAX_COORD):
+def get_Xs(N_TIMESTEPS):
 	X = [[Point(0, 0, 0)]]
 	for timestep in range(N_TIMESTEPS):
 		X_append = []
@@ -52,5 +55,13 @@ def get_only_unique(arr):
 			ret.append(a)
 	return ret
 
-print(run_experiment(2, 10))
+def get_grid(N_TIMESTEPS, MAX_COORD):
+	grid = np.array([[-1 for i in range(2 * MAX_COORD + 1)] for j in range(2 * MAX_COORD + 1)])
+	X = get_Xs(N_TIMESTEPS)[-1]
+	for point in X:
+		if math.fabs(point.x) <= MAX_COORD and math.fabs(point.y) <= MAX_COORD:
+			grid[MAX_COORD + point.x][MAX_COORD + point.y] = point.index
+	return grid
+
+print(get_grid(10, 10))
 
