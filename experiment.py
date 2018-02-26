@@ -63,5 +63,5 @@ def get_grid(N_TIMESTEPS, MAX_COORD):
 			grid[MAX_COORD + point.x][MAX_COORD + point.y] = point.index
 	return grid
 
-print(get_grid(10, 10))
+print(get_grid(35, 10))
 
